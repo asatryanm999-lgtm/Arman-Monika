@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Save the Date | Արման & Մոնիկա</title>
+    <title>Save the Date | Arman & Monika</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
+    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
         html, body { width: 100%; max-width: 100vw; overflow-x: hidden; background-color: #fff; color: #000; display: flex; flex-direction: column; align-items: center; }
 
@@ -45,14 +45,7 @@
             z-index: 2; cursor: pointer; touch-action: none; border-radius: 24px 24px 0 0;
         }
 
-        .music-floating-btn {
-            position: fixed; bottom: 25px; right: 25px; z-index: 998;
-            width: 52px; height: 52px; border-radius: 50%; background: #000; color: #fff;
-            border: none; display: flex; align-items: center; justify-content: center; cursor: pointer;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-        }
-
-        /* Ավելի տպավորիչ ու մեծ Fade-in անիմացիա բլոկների համար */
+        /* Բլոկների ֆեյդ-ին (Fade-in) անիմացիաներ */
         .fade-in { 
             opacity: 0; 
             transform: translateY(60px) scale(0.96); 
@@ -63,8 +56,8 @@
             transform: translateY(0) scale(1); 
         }
 
-        .container { width: 100%; max-width: 440px; display: flex; flex-direction: column; align-items: center; gap: 65px; padding: 35px 15px 90px 15px; box-sizing: border-box; }
-.hero-section { width: 100%; display: flex; flex-direction: column; align-items: center; background: #fff; border-radius: 24px; overflow: hidden; position: relative; box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .container { width: 100%; max-width: 440px; display: flex; flex-direction: column; align-items: center; gap: 50px; padding: 25px 15px 90px 15px; box-sizing: border-box; }
+        .hero-section { width: 100%; display: flex; flex-direction: column; align-items: center; background: #fff; border-radius: 24px; overflow: hidden; position: relative; box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
         .hero-img { width: 100%; height: auto; object-fit: cover; display: block; border-radius: 20px; }
         
         .hero-overlay-text {
@@ -72,36 +65,46 @@
             display: flex; justify-content: space-between; align-items: center; z-index: 3; pointer-events: none;
         }
         
-        /* Ձախ կողմի ամսաթիվ (ավելի մեծ տառերով) */
+        /* Մեծացված ամսաթիվ ձախ կողմում */
         .wedding-date-col {
             display: flex; flex-direction: column; align-items: flex-start;
-            font-size: 2.6rem; font-weight: 800; color: #fff; line-height: 1.1;
+            font-size: 2.8rem; font-weight: 800; color: #fff; line-height: 1.1;
             text-shadow: 0 3px 12px rgba(0,0,0,0.95);
             opacity: 0; transform: translateX(-140px);
             transition: all 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
         }
         .wedding-date-col.animate { opacity: 1; transform: translateX(0); }
 
-        /* Աջ կողմի անուններ (ավելի մեծ և գեղեցիկ) */
+        /* Մեծացված, լատինատառ, ձեռագիր և թեքված անուններ աջ կողմում */
         .couple-names-col {
             display: flex; flex-direction: column; align-items: flex-end; text-align: right;
-            font-family: 'Great Vibes', cursive; font-size: 3.1rem; font-weight: 600; color: #fff;
-            line-height: 1.1; text-shadow: 0 3px 12px rgba(0,0,0,0.95);
-            opacity: 0; transform: translateX(140px);
+            font-family: 'Great Vibes', cursive; font-size: 3.5rem; font-weight: 600; color: #fff;
+            line-height: 1.05; text-shadow: 0 3px 12px rgba(0,0,0,0.95);
+            transform: rotate(-5deg);
+            opacity: 0; transform: translateX(140px) rotate(-5deg);
             transition: all 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
         }
-        .couple-names-col.animate { opacity: 1; transform: translateX(0); }
-        .name-sub { font-family: 'Montserrat', sans-serif; font-size: 1.6rem; font-weight: 700; }
-        .ampersand { font-size: 1.8rem; font-family: 'Montserrat', sans-serif; font-weight: 300; margin: 3px 0; }
+        .couple-names-col.animate { opacity: 1; transform: translateX(0) rotate(-5deg); }
+        .name-sub { font-family: 'Great Vibes', cursive; font-size: 3.5rem; font-weight: 600; }
+        .ampersand { font-size: 2.2rem; font-family: 'Montserrat', sans-serif; font-weight: 300; margin: 2px 0; }
 
-        /* Ավելի մեծ ժամացույց / Timer */
+        /* Երաժշտության կոճակը հենց նկարի անմիջապես տակ */
+        .music-wrapper {
+            width: 100%; display: flex; justify-content: center; align-items: center; margin-top: -15px; z-index: 10;
+        }
+        .music-toggle-btn {
+            background: #000; color: #fff; border: none; padding: 12px 28px;
+            border-radius: 30px; font-size: 0.85rem; font-weight: 600; letter-spacing: 1.5px;
+            display: flex; align-items: center; gap: 8px; cursor: pointer;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25); text-transform: uppercase;
+        }
+
         .timer-grid { display: flex; justify-content: space-between; width: 100%; gap: 10px; }
         .timer-pill { flex: 1; height: 105px; border-radius: 45px; border: 2px solid #000; background-color: #fff; color: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
         .timer-pill.black { background-color: #000; color: #fff; }
         .timer-num { font-size: 1.7rem; font-weight: 800; line-height: 1.1; }
         .timer-unit { font-size: 0.75rem; font-weight: 600; margin-top: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
 
-        /* Ավելի մեծ օրացույց */
         .calendar-section { text-align: center; width: 100%; }
         .month-title { font-family: 'Great Vibes', cursive; font-size: 4rem; font-weight: 600; margin-bottom: 20px; color: #000; }
         .calendar-days { display: flex; justify-content: center; align-items: center; gap: 16px; }
@@ -112,7 +115,7 @@
     </style>
 </head>
 <body>
-<div id="intro-screen">
+  <div id="intro-screen">
         <div class="intro-box">
             <div class="intro-hidden-content">
                 <h1 class="intro-save">Save the Date</h1>
@@ -127,12 +130,6 @@
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
-    <button id="music-toggle" class="music-floating-btn" aria-label="Music">
-        <svg id="music-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-            <path d="M8 5v14l11-7z"/>
-        </svg>
-    </button>
-
     <div class="container">
         <div class="hero-section">
             <img src="Monika&Arman1.jpg" alt="Arman & Monika" class="hero-img">
@@ -143,11 +140,20 @@
                     <span>26</span>
                 </div>
                 <div class="couple-names-col" id="names-col">
-                    <span class="name-sub">Արման</span>
+                    <span class="name-sub">Arman</span>
                     <span class="ampersand">&</span>
-                    <span class="name-sub">Մոնիկա</span>
+                    <span class="name-sub">Monika</span>
                 </div>
             </div>
+        </div>
+
+        <div class="music-wrapper fade-in">
+            <button id="music-toggle" class="music-toggle-btn">
+                <svg id="music-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+                <span id="music-text">Երաժշտություն</span>
+            </button>
         </div>
 
         <div class="timer-grid fade-in">
@@ -182,13 +188,13 @@
                 <div class="day-num">24</div>
             </div>
         </div>
-<div class="restaurant-section fade-in" style="width: 100%; background: #fff; border-radius: 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;">
+        <div class="restaurant-section fade-in" style="width: 100%; background: #fff; border-radius: 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;">
             <div style="font-family: 'Great Vibes', cursive; font-size: 3.5rem; font-weight: 600; margin-bottom: 5px;">Ռեստորան</div>
             <img src="restoran.jpg" alt="Շատո Ռեստորան" style="width: 100%; border-radius: 20px; object-fit: cover; display: block; box-shadow: 0 8px 25px rgba(0,0,0,0.1);">
             <div style="font-size: 1.5rem; font-weight: 800; margin-top: 8px;">Շատո Ռեստորան</div>
             <div style="font-size: 1.1rem; color: #444; font-weight: 600;">Բաբաջանյան 48/1</div>
             <div style="font-size: 1.3rem; font-weight: 800; color: #000; margin-top: 4px;">Ժամը՝ 17:00</div>
-            <a href="http://googleusercontent.com/maps.google.com/3" target="_blank" style="display: inline-block; background-color: #000; color: #fff; padding: 16px 40px; border-radius: 35px; text-decoration: none; font-size: 0.85rem; font-weight: 700; letter-spacing: 2.5px; margin-top: 12px; text-transform: uppercase; box-shadow: 0 6px 18px rgba(0,0,0,0.2);">ՔԱՐՏԵԶ</a>
+            <a href="http://googleusercontent.com/maps.google.com/5" target="_blank" style="display: inline-block; background-color: #000; color: #fff; padding: 16px 40px; border-radius: 35px; text-decoration: none; font-size: 0.85rem; font-weight: 700; letter-spacing: 2.5px; margin-top: 12px; text-transform: uppercase; box-shadow: 0 6px 18px rgba(0,0,0,0.2);">ՔԱՐՏԵԶ</a>
         </div>
 
         <div class="second-img-wrapper fade-in" style="width: 100%; text-align: center; display: flex; flex-direction: column; gap: 18px;">
@@ -224,7 +230,7 @@
             </div>
         </div>
     </div>
-<script>
+    <script>
         const introScreen = document.getElementById('intro-screen');
         const dateCol = document.getElementById('date-col');
         const namesCol = document.getElementById('names-col');
@@ -297,6 +303,7 @@
         const audioTrack = document.getElementById('bg-music');
         const audioBtn = document.getElementById('music-toggle');
         const audioIcon = document.getElementById('music-icon');
+        const musicText = document.getElementById('music-text');
 
         const svgPlay = "M8 5v14l11-7z";
         const svgPause = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
@@ -305,6 +312,7 @@
             if (audioTrack) {
                 audioTrack.play().then(() => {
                     audioIcon.innerHTML = `<path d="${svgPause}"/>`;
+                    musicText.innerText = "Դադարեցնել";
                 }).catch(err => console.log("Աուդիո նվագարկումը սահմանափակված է։"));
             }
         }
@@ -313,9 +321,11 @@
             if (audioTrack.paused) {
                 audioTrack.play();
                 audioIcon.innerHTML = `<path d="${svgPause}"/>`;
+                musicText.innerText = "Դադարեցնել";
             } else {
                 audioTrack.pause();
                 audioIcon.innerHTML = `<path d="${svgPlay}"/>`;
+                musicText.innerText = "Երաժշտություն";
             }
         });
 
