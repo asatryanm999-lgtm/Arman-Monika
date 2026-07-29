@@ -57,7 +57,7 @@
         }
 
         .container { width: 100%; max-width: 440px; display: flex; flex-direction: column; align-items: center; gap: 50px; padding: 25px 15px 90px 15px; box-sizing: border-box; }
-        .hero-section { width: 100%; display: flex; flex-direction: column; align-items: center; background: #fff; border-radius: 24px; overflow: hidden; position: relative; box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+       .hero-section { width: 100%; display: flex; flex-direction: column; align-items: center; background: #fff; border-radius: 24px; overflow: hidden; position: relative; box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
         .hero-img { width: 100%; height: auto; object-fit: cover; display: block; border-radius: 20px; }
         
         .hero-overlay-text {
@@ -65,26 +65,29 @@
             display: flex; justify-content: space-between; align-items: flex-end; z-index: 3; pointer-events: none;
             background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
             border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
+            overflow: hidden;
         }
         
+        /* Ամսաթիվը գալիս է ձախից */
         .wedding-date-col {
             display: flex; flex-direction: column; align-items: flex-start;
             font-size: 2.2rem; font-weight: 800; color: #fff; line-height: 1.1;
             text-shadow: 0 2px 8px rgba(0,0,0,0.9);
-            opacity: 0; transform: translateY(40px);
-            transition: all 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+            opacity: 0; transform: translateX(-80px);
+            transition: all 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
         }
-        .wedding-date-col.animate { opacity: 1; transform: translateY(0); }
+        .wedding-date-col.animate { opacity: 1; transform: translateX(0); }
 
+        /* Անունները գալիս են աջից */
         .couple-names-col {
             display: flex; flex-direction: column; align-items: flex-end; text-align: right;
             font-family: 'Great Vibes', cursive; font-size: 3rem; font-weight: 600; color: #fff;
             line-height: 1.05; text-shadow: 0 2px 8px rgba(0,0,0,0.9);
-            transform: rotate(-3deg);
-            opacity: 0; transform: translateY(40px) rotate(-3deg);
-            transition: all 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+            transform: rotate(-3deg) translateX(80px);
+            opacity: 0;
+            transition: all 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
         }
-        .couple-names-col.animate { opacity: 1; transform: translateY(0) rotate(-3deg); }
+        .couple-names-col.animate { opacity: 1; transform: rotate(-3deg) translateX(0); }
         .name-sub { font-family: 'Great Vibes', cursive; font-size: 3rem; font-weight: 600; }
         .ampersand { font-size: 1.8rem; font-family: 'Montserrat', sans-serif; font-weight: 300; margin: 1px 0; }
 
@@ -113,7 +116,7 @@
         .day-num.heart-day span { position: relative; z-index: 2; font-size: 1.5rem; }
     </style>
 </head>
-<body>
+  <body>
 
     <div id="intro-screen">
         <div class="intro-box">
@@ -185,7 +188,7 @@
                 <div class="day-num">24</div>
             </div>
         </div>
-     <div class="restaurant-section fade-in" style="width: 100%; background: #fff; border-radius: 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;">
+        <div class="restaurant-section fade-in" style="width: 100%; background: #fff; border-radius: 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;">
             <div style="font-family: 'Great Vibes', cursive; font-size: 3.5rem; font-weight: 600; margin-bottom: 5px;">Ռեստորան</div>
             <img src="restoran.jpg" alt="Շատո Ռեստորան" style="width: 100%; border-radius: 20px; object-fit: cover; display: block; box-shadow: 0 8px 25px rgba(0,0,0,0.1);">
             <div style="font-size: 1.5rem; font-weight: 800; margin-top: 8px;">Շատո Ռեստորան</div>
@@ -227,7 +230,7 @@
                 <button type="button" onclick="sendWeddingRSVP()" style="background-color: #000; color: #fff; border: none; padding: 18px; font-size: 0.95rem; font-weight: 700; letter-spacing: 2.5px; cursor: pointer; margin-top: 10px; width: 100%; border-radius: 12px; text-transform: uppercase; box-shadow: 0 6px 20px rgba(0,0,0,0.25);">ՈՒՂԱՐԿԵԼ</button>
             </div>
         </div>
-    </div>   
+    </div>
     <script>
         const introScreen = document.getElementById('intro-screen');
         const dateCol = document.getElementById('date-col');
@@ -246,7 +249,7 @@
             }, 300);
         }
 
-        // 11 վայրկյան ավտոբացում
+        // Հաստատ 11 վայրկյանից անպայման բացվում է (անկախ քերելուց)
         setTimeout(openIntro, 11000);
 
         const canvas = document.getElementById('scratch-canvas');
@@ -275,19 +278,6 @@
             ctx.beginPath();
             ctx.arc(x, y, 35, 0, Math.PI * 2, false);
             ctx.fill();
-
-            checkScratchedPercentage();
-        }
-
-        function checkScratchedPercentage() {
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            let cleared = 0;
-            for (let i = 3; i < imageData.data.length; i += 4) {
-                if (imageData.data[i] === 0) cleared++;
-            }
-            if (cleared > (canvas.width * canvas.height) * 0.45) {
-                openIntro();
-            }
         }
 
         canvas.addEventListener('mousedown', () => isDrawing = true);
@@ -370,6 +360,7 @@
 
             const whatsappText = `💍 *RSVP ՀԱՍՏԱՏՈՒՄ*%0A%0A👤 *Անուն:* ${fullName}%0A✨ *Մասնակցություն:* ${status}%0A👥 *Քանակ:* ${count}%0A❤️ *Կողմը:* ${side}`;
             
+            // Ուղարկվում է հենց 077509902 WhatsApp համարին
             window.open(`https://wa.me/37477509902?text=${whatsappText}`, '_blank');
         }
     </script>
